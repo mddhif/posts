@@ -26,7 +26,16 @@ public class PostController {
     public ResponseEntity<Post> getPosts(@RequestParam(defaultValue = "1") int page,
                                          @RequestParam(defaultValue = "20") int limit) {
 
+
         log.info("page: {}, limit: {}", page, limit);
+
+        //params validation
+        if (page <= 0 || limit <= 0 ) {
+            //return bad request in case params are invalid
+            // exception caught by our global handler
+            throw new IllegalArgumentException("Invalid page or limit value");
+        }
+
         return postService.getPosts(page, limit);
 
     }

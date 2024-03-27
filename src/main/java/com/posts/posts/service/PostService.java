@@ -27,6 +27,7 @@ public class PostService {
         Pageable pageable = PageRequest.of(page, limit);
 
         //use reactive client (from webflux)
+        // pass page and limit to webclient
         WebClient webClient = WebClient.create(serverUrl);
         ResponseEntity postsList = webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/posts")
